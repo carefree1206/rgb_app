@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "文字增强相机",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "result-compare": "/components/result-compare/index",
+    "result-compare-placeholder": "/components/result-compare-placeholder/index"
+  },
+  "componentPlaceholder": {
+    "result-compare": "result-compare-placeholder"
+  }
+}

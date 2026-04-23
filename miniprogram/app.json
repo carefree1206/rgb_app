@@ -1,0 +1,14 @@
+{
+  "lazyCodeLoading": "requiredComponents",
+  "pages": [
+    "pages/camera/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "文字增强相机",
+    "navigationBarBackgroundColor": "#0b1220",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#f3f4f6"
+  },
+  "sitemapLocation": "sitemap.json"
+}

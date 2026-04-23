@@ -1,0 +1,168 @@
+<view class="page">
+  <view class="bg-glow glow-left"></view>
+  <view class="bg-glow glow-right"></view>
+
+  <view class="hero-card">
+    <view class="hero-main">
+      <text class="hero-title">文字增强相机</text>
+      <text class="hero-subtitle">实时预览增强 + 拍照高清增强（纯本地处理）</text>
+    </view>
+    <view class="hero-badges">
+      <view class="hero-badge">
+        <text class="badge-label">状态</text>
+        <text class="badge-value">{{cameraStateText}}</text>
+      </view>
+      <view class="hero-badge">
+        <text class="badge-label">设备</text>
+        <text class="badge-value">{{deviceTierLabel}}</text>
+      </view>
+      <view class="hero-badge">
+        <text class="badge-label">FPS</text>
+        <text class="badge-value mono">{{fps}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="preview-card">
+    <view class="section-head">
+      <text class="section-title">实时预览</text>
+      <text class="section-tip mono">单帧耗时 {{processingMs}}ms</text>
+    </view>
+
+    <view class="preview-shell">
+      <view class="preview-stage" style="transform: scale({{digitalZoom}});">
+        <camera
+          class="camera-view"
+          mode="normal"
+          device-position="back"
+          flash="off"
+          zoom="{{zoom}}"
+          binderror="handleCameraError"
+          bindinitdone="handleCameraInitDone"
+        ></camera>
+        <canvas
+          id="enhanceCanvas"
+          type="2d"
+          class="enhance-canvas {{overlayClass}}"
+        ></canvas>
+      </view>
+
+      <view wx:if="{{showPermissionMask}}" class="permission-mask">
+        <text class="permission-title">需要相机权限</text>
+        <text class="permission-subtitle">请授权后再使用实时预览与拍照增强功能。</text>
+        <button class="primary-btn" size="mini" bindtap="requestCameraPermission">
+          立即授权
+        </button>
+        <button wx:if="{{permissionDenied}}" class="ghost-btn" size="mini" bindtap="openSettingsForCamera">
+          前往设置开启
+        </button>
+      </view>
+    </view>
+
+    <view class="preview-hint" wx:if="{{!realtimeAvailable}}">
+      <text>当前环境不支持实时帧增强，你仍可使用拍照增强。</text>
+    </view>
+  </view>
+
+  <view class="control-card">
+    <view class="section-head">
+      <text class="section-title">增强控制</text>
+      <text class="section-tip">当前模式：{{enhanceModeText}}</text>
+    </view>
+
+    <view class="block">
+      <text class="block-title">模式选择</text>
+      <radio-group class="mode-group" bindchange="handleModeChange">
+        <label class="mode-chip {{realtimeModeClass}}">
+          <radio value="realtime" checked="{{enhanceMode == 'realtime'}}" />
+          <text>实时优先</text>
+        </label>
+        <label class="mode-chip {{captureModeClass}}">
+          <radio value="capture" checked="{{enhanceMode == 'capture'}}" />
+          <text>拍照优先</text>
+        </label>
+      </radio-group>
+    </view>
+
+    <view class="block">
+      <view class="line">
+        <text class="line-label">实时增强叠层</text>
+        <switch checked="{{realtimeEnabled}}" bindchange="handleRealtimeSwitchChange" />
+      </view>
+      <view class="line">
+        <text class="line-label">透视矫正（预留）</text>
+        <switch checked="{{perspectiveCorrection}}" bindchange="handlePerspectiveSwitchChange" />
+      </view>
+    </view>
+
+    <view class="block">
+      <text class="line-label">原生变焦 {{zoom}}</text>
+      <slider
+        min="1"
+        max="{{maxZoom}}"
+        step="0.1"
+        value="{{zoom}}"
+        show-value
+        activeColor="#1d4ed8"
+        backgroundColor="#dbeafe"
+        block-color="#1d4ed8"
+        bindchanging="handleNativeZoomChange"
+        bindchange="handleNativeZoomChange"
+      />
+      <text class="line-label">数字变焦 {{digitalZoom}}</text>
+      <slider
+        min="1"
+        max="2"
+        step="0.01"
+        value="{{digitalZoom}}"
+        show-value
+        activeColor="#0f766e"
+        backgroundColor="#ccfbf1"
+        block-color="#0f766e"
+        bindchanging="handleDigitalZoomChange"
+        bindchange="handleDigitalZoomChange"
+      />
+      <text class="line-label">增强强度 {{enhanceStrength}}%</text>
+      <slider
+        min="20"
+        max="100"
+        step="1"
+        value="{{enhanceStrength}}"
+        show-value
+        activeColor="#b45309"
+        backgroundColor="#ffedd5"
+        block-color="#b45309"
+        bindchanging="handleEnhanceStrengthChange"
+        bindchange="handleEnhanceStrengthChange"
+      />
+    </view>
+
+    <view class="action-row">
+      <button class="primary-btn action-btn" loading="{{cameraState == 'processing'}}" bindtap="captureAndEnhance">
+        拍照并增强
+      </button>
+      <button wx:if="{{canRetry}}" class="ghost-btn action-btn" bindtap="retryLocalEnhance">
+        重新处理
+      </button>
+    </view>
+  </view>
+
+  <view wx:if="{{errorMessage}}" class="error-card">
+    <text class="error-title">处理异常</text>
+    <text class="error-message">{{errorMessage}}</text>
+  </view>
+
+  <result-compare
+    wx:if="{{showResult}}"
+    metrics-text="{{metricsText}}"
+    raw-photo="{{rawPhoto}}"
+    enhanced-photo="{{resultImagePath}}"
+  ></result-compare>
+
+  <canvas id="captureCanvasNode" type="2d" class="capture-canvas"></canvas>
+  <canvas
+    canvas-id="captureCanvasLegacy"
+    class="capture-canvas"
+    style="width: {{captureCanvasWidth}}px; height: {{captureCanvasHeight}}px;"
+  ></canvas>
+</view>

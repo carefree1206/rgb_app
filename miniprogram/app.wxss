@@ -1,0 +1,9 @@
+page {
+  background: linear-gradient(160deg, #f0f4ff 0%, #fff8ef 48%, #f4fffb 100%);
+  color: #111827;
+  font-family: "HarmonyOS Sans SC", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+.mono {
+  font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}

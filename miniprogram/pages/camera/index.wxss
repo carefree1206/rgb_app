@@ -1,0 +1,284 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bg-glow {
+  position: absolute;
+  width: 340rpx;
+  height: 340rpx;
+  border-radius: 999rpx;
+  filter: blur(28rpx);
+  opacity: 0.34;
+  z-index: 0;
+}
+
+.glow-left {
+  left: -120rpx;
+  top: 60rpx;
+  background: #93c5fd;
+}
+
+.glow-right {
+  right: -100rpx;
+  top: 380rpx;
+  background: #86efac;
+}
+
+.hero-card,
+.preview-card,
+.control-card,
+.error-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1rpx solid rgba(148, 163, 184, 0.2);
+  border-radius: 28rpx;
+  padding: 22rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 14rpx 40rpx rgba(15, 23, 42, 0.08);
+}
+
+.hero-card {
+  background: linear-gradient(140deg, rgba(29, 78, 216, 0.92) 0%, rgba(15, 118, 110, 0.9) 100%);
+  color: #f8fafc;
+  border: none;
+}
+
+.hero-main {
+  margin-bottom: 18rpx;
+}
+
+.hero-title {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 700;
+  letter-spacing: 0.6rpx;
+  margin-bottom: 8rpx;
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: 22rpx;
+  color: rgba(241, 245, 249, 0.88);
+}
+
+.hero-badges {
+  display: flex;
+  gap: 12rpx;
+}
+
+.hero-badge {
+  flex: 1;
+  border-radius: 16rpx;
+  padding: 12rpx;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.badge-label {
+  display: block;
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4rpx;
+}
+
+.badge-value {
+  display: block;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14rpx;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.section-tip {
+  font-size: 22rpx;
+  color: #475569;
+}
+
+.preview-shell {
+  position: relative;
+  height: 560rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  background: #020617;
+}
+
+.preview-stage {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+
+.camera-view,
+.enhance-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.enhance-canvas {
+  opacity: 0.58;
+}
+
+.enhance-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.permission-mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  background: rgba(2, 6, 23, 0.82);
+  color: #f8fafc;
+  text-align: center;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.permission-title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.permission-subtitle {
+  font-size: 24rpx;
+  color: #cbd5e1;
+}
+
+.preview-hint {
+  margin-top: 12rpx;
+  padding: 12rpx 14rpx;
+  border-radius: 14rpx;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 22rpx;
+}
+
+.block {
+  margin-bottom: 20rpx;
+}
+
+.block:last-child {
+  margin-bottom: 0;
+}
+
+.block-title {
+  display: block;
+  font-size: 26rpx;
+  margin-bottom: 12rpx;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.mode-group {
+  display: flex;
+  gap: 12rpx;
+}
+
+.mode-chip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 10rpx 14rpx;
+  border-radius: 14rpx;
+  border: 1rpx solid #cbd5e1;
+  color: #334155;
+  font-size: 24rpx;
+  background: #ffffff;
+}
+
+.mode-chip-active {
+  border-color: #1d4ed8;
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+
+.line:last-child {
+  margin-bottom: 0;
+}
+
+.line-label {
+  display: block;
+  margin-bottom: 8rpx;
+  color: #0f172a;
+  font-size: 24rpx;
+}
+
+.action-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.action-btn {
+  flex: 1;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #1d4ed8 0%, #0f766e 100%);
+  color: #ffffff;
+  border: 0;
+}
+
+.ghost-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+  border: 0;
+}
+
+.error-card {
+  border: 1rpx solid #fecaca;
+  background: #fff1f2;
+}
+
+.error-title {
+  display: block;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #b91c1c;
+  margin-bottom: 6rpx;
+}
+
+.error-message {
+  display: block;
+  font-size: 24rpx;
+  color: #be123c;
+}
+
+.capture-canvas {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  left: -9999px;
+  top: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}

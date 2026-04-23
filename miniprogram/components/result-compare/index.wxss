@@ -1,0 +1,69 @@
+.result-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1rpx solid rgba(148, 163, 184, 0.2);
+  border-radius: 28rpx;
+  padding: 22rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 14rpx 40rpx rgba(15, 23, 42, 0.08);
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14rpx;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.section-tip {
+  font-size: 22rpx;
+  color: #475569;
+}
+
+.preview-tip {
+  margin-bottom: 12rpx;
+  padding: 10rpx 12rpx;
+  border-radius: 12rpx;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 22rpx;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14rpx;
+}
+
+.result-col {
+  background: #f8fafc;
+  border-radius: 14rpx;
+  padding: 12rpx;
+}
+
+.result-label {
+  display: block;
+  margin-bottom: 8rpx;
+  font-size: 22rpx;
+  color: #475569;
+}
+
+.result-image {
+  width: 100%;
+  height: 280rpx;
+  border-radius: 10rpx;
+  background: #0f172a;
+  border: 1rpx solid #cbd5e1;
+}
+
+.mono {
+  font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}

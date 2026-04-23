@@ -1,0 +1,16 @@
+<view class="placeholder-card">
+  <view class="placeholder-head">
+    <view class="skeleton skeleton-title"></view>
+    <view class="skeleton skeleton-tip"></view>
+  </view>
+  <view class="placeholder-grid">
+    <view class="placeholder-col">
+      <view class="skeleton skeleton-label"></view>
+      <view class="skeleton skeleton-image"></view>
+    </view>
+    <view class="placeholder-col">
+      <view class="skeleton skeleton-label"></view>
+      <view class="skeleton skeleton-image"></view>
+    </view>
+  </view>
+</view>

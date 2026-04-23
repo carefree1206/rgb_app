@@ -1,0 +1,33 @@
+<view class="result-card">
+  <view class="section-head">
+    <text class="section-title">增强结果对比</text>
+    <text class="section-tip mono">{{metricsText}}</text>
+  </view>
+
+  <view class="preview-tip">
+    <text>点击图片可放大查看，支持左右切换对比</text>
+  </view>
+
+  <view class="result-grid">
+    <view class="result-col">
+      <text class="result-label">原图</text>
+      <image
+        class="result-image"
+        mode="aspectFit"
+        src="{{rawPhoto}}"
+        bindtap="previewRaw"
+        show-menu-by-longpress="true"
+      />
+    </view>
+    <view class="result-col">
+      <text class="result-label">增强后</text>
+      <image
+        class="result-image"
+        mode="aspectFit"
+        src="{{enhancedPhoto}}"
+        bindtap="previewEnhanced"
+        show-menu-by-longpress="true"
+      />
+    </view>
+  </view>
+</view>
