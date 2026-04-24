@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文字增强相机（网页版）</title>
+    <link rel="stylesheet" href="./style.css?v=20260424-8" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero-card">
+        <div class="hero-main">
+          <h1>文字增强相机</h1>
+          <p>纯网页版本 · 实时预览增强 + 拍照高清增强 + OCR 识别</p>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span class="label">状态</span>
+            <span class="value" id="statusText">待机</span>
+          </div>
+          <div class="hero-badge">
+            <span class="label">设备档位</span>
+            <span class="value" id="tierText">检测中</span>
+          </div>
+          <div class="hero-badge">
+            <span class="label">FPS</span>
+            <span class="value mono" id="fpsText">0</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="preview-card">
+        <div class="section-head">
+          <h2>实时预览</h2>
+          <span class="mono" id="processingText">单帧耗时 0ms</span>
+        </div>
+
+        <div class="preview-shell">
+          <div class="preview-stage" id="previewStage">
+            <video id="cameraVideo" autoplay playsinline muted></video>
+            <canvas id="overlayCanvas"></canvas>
+          </div>
+          <div class="permission-mask" id="permissionMask">
+            <h3>需要相机权限</h3>
+            <p>请允许浏览器访问摄像头后再开始预览和增强。</p>
+            <button id="grantCameraBtn" class="primary-btn">开启摄像头</button>
+          </div>
+        </div>
+        <p class="preview-hint" id="realtimeHint"></p>
+      </section>
+
+      <section class="control-card">
+        <div class="section-head">
+          <h2>增强控制</h2>
+          <span id="modeText">当前模式：实时优先</span>
+        </div>
+
+        <div class="block">
+          <h3>模式选择</h3>
+          <div class="chip-group">
+            <label class="mode-chip mode-chip-active" id="chipRealtime">
+              <input type="radio" name="mode" value="realtime" checked />
+              <span>实时优先</span>
+            </label>
+            <label class="mode-chip" id="chipCapture">
+              <input type="radio" name="mode" value="capture" />
+              <span>拍照优先</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="block">
+          <label class="line">
+            <span>实时增强叠层</span>
+            <input type="checkbox" id="realtimeToggle" checked />
+          </label>
+        </div>
+
+        <div class="block">
+          <label for="nativeZoomRange">原生变焦 <span id="nativeZoomText">1.0</span></label>
+          <input id="nativeZoomRange" type="range" min="1" max="1" step="0.1" value="1" />
+          <small id="nativeZoomHint">正在检测是否支持原生变焦…</small>
+
+          <label for="digitalZoomRange">数字变焦 <span id="digitalZoomText">1.00</span></label>
+          <input id="digitalZoomRange" type="range" min="1" max="2" step="0.01" value="1" />
+
+          <label for="strengthRange">增强强度 <span id="strengthText">70%</span></label>
+          <input id="strengthRange" type="range" min="20" max="100" step="1" value="70" />
+        </div>
+
+        <div class="action-row">
+          <button id="captureBtn" class="primary-btn">拍照并增强</button>
+          <button id="retryBtn" class="ghost-btn" hidden>重新处理</button>
+        </div>
+      </section>
+
+      <section class="error-card" id="errorCard" hidden>
+        <h3>处理异常</h3>
+        <p id="errorText"></p>
+      </section>
+
+      <section class="result-card" id="resultCard" hidden>
+        <div class="section-head">
+          <h2>增强结果对比</h2>
+          <span class="mono" id="metricsText"></span>
+        </div>
+        <p class="preview-tip">点击图片可放大查看，支持左右切换对比</p>
+        <div class="result-grid">
+          <article class="result-col">
+            <h3>原图</h3>
+            <img id="rawImage" alt="原图" />
+          </article>
+          <article class="result-col">
+            <h3>增强后</h3>
+            <img id="enhancedImage" alt="增强后图片" />
+          </article>
+        </div>
+
+        <div class="ocr-panel">
+          <div class="section-head">
+            <h3>文字识别（OCR）</h3>
+            <span class="mono" id="ocrStatusText">尚未识别</span>
+          </div>
+          <div class="ocr-actions">
+            <select id="ocrLangSelect" aria-label="OCR 识别语言">
+              <option value="chi_sim+eng" selected>中文+英文</option>
+              <option value="chi_sim">仅中文</option>
+              <option value="eng">仅英文</option>
+            </select>
+            <button id="recognizeBtn" class="primary-btn">识别增强图文字</button>
+            <button id="copyTextBtn" class="ghost-btn" disabled>复制识别结果</button>
+          </div>
+          <textarea
+            id="ocrOutput"
+            class="ocr-output"
+            rows="8"
+            readonly
+            placeholder="识别结果将显示在这里，便于直接复制到文档。"
+          ></textarea>
+        </div>
+      </section>
+    </main>
+
+    <canvas id="workCanvas" class="hidden-canvas"></canvas>
+    <canvas id="captureCanvas" class="hidden-canvas"></canvas>
+    <script src="./app.js?v=20260424-8"></script>
+  </body>
+  </html>
