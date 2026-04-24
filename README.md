@@ -1,47 +1,43 @@
-# 微信小程序：文字增强相机（V1）
+# 文字增强相机（网页版）
 
-这是一个原生微信小程序示例，聚焦“文档文字更清晰”的拍摄体验，包含以下能力：
+这是一个纯前端网页项目，用于：
+- 相机预览
+- 拍照后图像增强
+- OCR 文字识别与复制
 
-- 实时预览增强（灰度、对比度、锐化、降噪）
-- 两段式变焦（相机原生变焦 + 画面数字变焦）
-- 拍照后本地增强（纯端侧，不依赖云开发）
-- 根据设备档位自动调整实时增强强度（`high / mid / low`）
+## 本地运行
 
-## 项目结构
-
-- `miniprogram/`：小程序前端代码
-- `docs/test-plan.md`：手工测试清单
-
-## 运行方式
-
-1. 用微信开发者工具打开项目根目录。
-2. 在 `project.config.json` 中确认 `appid`。
-3. 点击“编译”运行。
-
-## 启动性能优化（已启用）
-
-本项目已启用以下特性以降低启动注入开销：
-
-1. 按需注入  
-在 `miniprogram/app.json` 中配置：
-
-```json
-{
-  "lazyCodeLoading": "requiredComponents"
-}
+```bash
+cd D:\Project\rgb_app
+python -m http.server 5173
 ```
 
-2. 用时注入  
-将结果对比区域拆为自定义组件，并为其配置占位组件：
+浏览器打开：
 
-- 页面配置：`miniprogram/pages/camera/index.json`
-- 实际组件：`miniprogram/components/result-compare/`
-- 占位组件：`miniprogram/components/result-compare-placeholder/`
+`http://127.0.0.1:5173/index.html`
 
-这样结果组件不会在首屏启动时注入，首次渲染到该组件时才注入并替换占位内容。
+## 手机端访问
+
+手机端请使用 HTTPS 公网地址（如 Vercel 部署地址），否则相机权限可能不可用。
+
+部署建议：
+1. 推送到 GitHub
+2. 在 Vercel 导入仓库
+3. Framework 选 `Other`
+4. 发布后使用 `https://xxx.vercel.app`
+
+## OCR 资源
+
+项目支持 OCR 本地资源优先加载，目录：
+- `ocr-assets/tesseract/`
+- `ocr-assets/lang/`
+
+下载脚本：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\download-ocr-assets.ps1
+```
 
 ## 说明
 
-- V1 不包含 OCR 文字识别，仅做画面清晰化增强。
-- 当前版本为纯本地方案，不依赖微信云开发。
-- “透视矫正”在界面中作为预留开关，后续可接入更强图像算法。
+`start-web.bat` 仅用于本地开发调试，不作为手机正式入口。
